@@ -13,7 +13,15 @@ body{
 }
 
 h3 {
+   font-size:30px;
    text-align:center;
+   margin:10px auto;
+}
+
+.instruction{
+   font-size:23px;
+   text-align:center;
+   width:50%;
    margin:10px auto;
 }
 
@@ -50,14 +58,40 @@ h3 {
    padding: 10px 15px;
    color: white;
    border-radius:7px;
+   position:relative;
+
 }
 
-.next-btn{
-   display: inline-block;
-   margin-left:0;
+.options:hover{
+   top:-2px;
+   cursor:pointer; 
+}
+.options:active{
+   top:-1px;
 }
 
-.prev-btn{
-   display:inline-block;
-   margin-right:0;
+.evaluation{
+   font-size:25px;
+   color:rgb(128, 128, 128);
+   text-align:center;
+   font-style:italic;
+}
+
+.score-display-wrapper{
+   display:flex;
+   flex-flow: column wrap;
+   justify-content: center;
+   align-items: center;
+}
+
+.score-display{
+   font-size:36px;
+   color: black;
+   text-align: center;
+}
+
+label[for='initial']{
+   margin: center;
+   border: 1px solid black;
+   font-size:28px;
 }
