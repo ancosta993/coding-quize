@@ -1,0 +1,63 @@
+*{
+   -webkit-box-sizing: border-box;
+   -moz-boz-sizing: border-box;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+body{
+   font-family: 'Courier New', Courier, monospace;
+   width:90%;
+   margin: auto;
+}
+
+h3 {
+   text-align:center;
+   margin:10px auto;
+}
+
+.btn{
+   display:block;
+   text-align:center;
+   font-size:1rem;
+   margin: 10px auto;
+   padding: 10px 15px;
+   background-color: purple;
+   color: white;
+   border-radius:7px;
+   position:relative;
+}
+.btn:hover{
+   border-color:rgba(0,0,0,.5);
+   top: -2px;
+   cursor: pointer;
+}
+
+.btn:active{
+   top: 1px;
+}
+
+.option-wrapper{
+   margin:0 auto;
+   text-align: center;
+}
+
+.options{
+   text-align:center;
+   font-size:1rem;
+   margin: 10px auto;
+   padding: 10px 15px;
+   color: white;
+   border-radius:7px;
+}
+
+.next-btn{
+   display: inline-block;
+   margin-left:0;
+}
+
+.prev-btn{
+   display:inline-block;
+   margin-right:0;
+}
