@@ -12,6 +12,15 @@ body{
    margin: auto;
 }
 
+.timer{
+   text-align: right;
+   position: relative;
+   right:0;
+   font-size: 25px;
+   color: black;
+}
+
+
 h3 {
    font-size:30px;
    text-align:center;
@@ -92,6 +101,5 @@ h3 {
 
 label[for='initial']{
    margin: center;
-   border: 1px solid black;
    font-size:28px;
 }

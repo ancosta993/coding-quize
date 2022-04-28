@@ -1,4 +1,26 @@
 
+// get the timer functionality
+var intervalId;
+
+var displayTimer = document.querySelector("#timer");
+var time = 50;
+
+var timeCounter = function(){
+   time--;
+   if(time <= 0){
+      clearInterval(intervalId);
+      showScore();
+      createFormInitial();
+      displayTimer.textContent = "Time is Up!"
+      displayTimer.setAttribute('style','background-color:red; color:white; text-align:center;')
+   } else {
+      displayTimer.textContent = time;
+   }
+   
+};
+
+
+
 // Initialize variable assignment with selectors
 var optionWrapper = document.querySelector("#option-wrapper");
 var questionTitle = document.querySelector("#question-title");
@@ -112,6 +134,7 @@ var questionObjArr = [
 
 
 
+
 var displayQuestion = function() {
    
    // Make the options appear again;
@@ -150,7 +173,6 @@ var displayQuestion = function() {
    // prevBtn.setAttribute("style", "display:inline-block");
 };
 
-
 // Showing the final score and recording it
 var showScore = function(){
    // remove everything after the quize is finished
@@ -165,23 +187,52 @@ var showScore = function(){
    
 };
 
-var storeScore = function(){
-   // create an input for getting the initials
+
+var createFormInitial = function(){
+   // create a form for getting input (initials)
+   var inputForm = document.createElement('form');
+   // create the label
    var inputLabel = document.createElement("label");
    inputLabel.textContent = "Initials: "
    inputLabel.setAttribute('for', 'initial');
+   // create the input field (text)
+   var initialInput = document.createElement('input');
+   initialInput.setAttribute('name', 'initial');
+   initialInput.setAttribute('id','initial');
+   initialInput.setAttribute('type', 'text');
 
-   var getInitial = document.createElement('input');
-   getInitial.setAttribute('name', 'initial');
-   getInitial.setAttribute('id','initial');
-   getInitial.setAttribute('type', 'text');
-   
+   // create a submit button
+   var submitBtn = document.createElement('button');
+   submitBtn.textContent = 'submit';
+   submitBtn.className = 'btn';
+   submitBtn.setAttribute('id','submit-btn');
+   // append the label, initials, and the button in the form
+   inputForm.appendChild(inputLabel);
+   inputForm.appendChild(initialInput);
+   inputForm.appendChild(submitBtn);
+   // give style to main content and append the form in the main content.
    mainParent.className = 'score-display-wrapper';
-   mainParent.appendChild(inputLabel);
-   mainParent.appendChild(getInitial);
-}
+   mainParent.appendChild(inputForm);
+   
+};
 
-// function that evaluates if a clicked option is correct choice
+
+
+// function to set score
+var storeScore = function(event){
+   var initialInput = document.querySelector('#initial')
+   var targetedEl = event.target;
+   if (targetedEl.matches('#submit-btn')){
+      var givenInitial = initialInput.value;
+      console.log(givenInitial + " " + score);
+      localStorage.setItem(givenInitial, score);
+   }
+   
+};
+// add event listner to the submit initial button
+mainParent.addEventListener('click', storeScore);
+
+// function that evaluates if an option is clicked (added an event for it)
 var evaluate = function(event){
    // First, make sure only the clicks in the options are tested, not the background
    if (event.target.matches(".options")){
@@ -192,22 +243,23 @@ var evaluate = function(event){
     }
       else {
          evaluation.textContent = "Wrong!";
+         time -= 10;
       }
    };
    // increase counter by 1 to get the next question
    counter++;
    // if the counter (index) is greater than length-1 of the array, send an alert message.
    if (counter <= questionObjArr.length-1){
-      displayQuestion(counter);
+      displayQuestion();
    } else {
       counter--;
+      clearInterval(intervalId);
       showScore();
-      storeScore();
+      createFormInitial();
    }
    
 
 };
-
 
 // var nextQuestion = function(){
 //    counter++;
@@ -246,5 +298,7 @@ var evaluate = function(event){
 
 
 startButton.addEventListener('click', displayQuestion);
+startButton.addEventListener('click', function() {
+   intervalId = setInterval(timeCounter, 1000);
+});
 optionWrapper.addEventListener('click', evaluate);
-// optionWrapper.addEventListener('click', btnTask);
