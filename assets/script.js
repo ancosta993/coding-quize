@@ -3,7 +3,7 @@
 var intervalId;
 
 var displayTimer = document.querySelector("#timer");
-var time = 5;
+var time = 70;
 
 var timeCounter = function(){
    time--;
