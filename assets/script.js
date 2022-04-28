@@ -3,7 +3,7 @@
 var intervalId;
 
 var displayTimer = document.querySelector("#timer");
-var time = 50;
+var time = 5;
 
 var timeCounter = function(){
    time--;
@@ -12,16 +12,29 @@ var timeCounter = function(){
       showScore();
       createFormInitial();
       displayTimer.textContent = "Time is Up!"
-      displayTimer.setAttribute('style','background-color:red; color:white; text-align:center;')
+      displayTimer.className = '.timer'
+      displayTimer.setAttribute('style','background-color:red; color:white; text-align:center; font-size: 20px;')
    } else {
       displayTimer.textContent = time;
    }
    
 };
 
+// make the score keeping object
+var scoreList = function(){
+   if (!localStorage.getItem('Score list')){
+      var scoreListObj = [];
+   } else {
+      var scoreListObj = JSON.parse(localStorage.getItem("Score list"));
+   }
+return scoreListObj;
+}
+// scoreObj are going to be appended in it as we generate them
+
 
 
 // Initialize variable assignment with selectors
+var getScoreBtn = document.querySelector("#get-score");
 var optionWrapper = document.querySelector("#option-wrapper");
 var questionTitle = document.querySelector("#question-title");
 var mainParent = document.querySelector("#page-content");
@@ -36,6 +49,23 @@ var instruction = document.querySelector("#instruction");
 var counter = 0;
 // start scoring
 var score = 0;
+
+// get score from local storage
+
+
+// display Highscore score function
+// var getScore = function(){
+
+//    if (mainParent.style.display === 'block'){
+//       mainParent.style.display = 'none';
+//       var scorPanel = document.createElement('div');
+
+//    } else{
+//    mainParent.style.display = 'block';
+//    }
+// };
+
+
 
 // making the list of options dissapear at the beginning
 var optionList = [option1, option2, option3, option4];
@@ -142,9 +172,10 @@ var displayQuestion = function() {
       optionList[i].style.display = 'block';
    };
 
-   // remove the instruction and the START Button
+   // remove the instructions, the START Button, and high scores
    instruction.remove();
    startButton.remove();
+   getScoreBtn.remove();
 
 
    
@@ -220,12 +251,21 @@ var createFormInitial = function(){
 
 // function to set score
 var storeScore = function(event){
+   var tempScoreObj = {};
    var initialInput = document.querySelector('#initial')
    var targetedEl = event.target;
    if (targetedEl.matches('#submit-btn')){
       var givenInitial = initialInput.value;
-      console.log(givenInitial + " " + score);
-      localStorage.setItem(givenInitial, score);
+      tempScoreObj.initial = givenInitial;
+      tempScoreObj.score = score;
+      var scoreListObj = scoreList();
+      if (tempScoreObj.initial != "") {
+         scoreListObj.push(tempScoreObj);
+         localStorage.setItem('Score list', JSON.stringify(scoreListObj));
+      } else {
+         alert("Score was not recorded.")
+      }
+          
    }
    
 };
@@ -296,9 +336,35 @@ var evaluate = function(event){
 
 // };
 
+// Displaying the score
+var displayAllScore = function(){
+   if(mainParent.style.display != 'none'){
+      this.textContent = "Go back"
+      mainParent.style.display = 'none';
+      var scorePanel = document.createElement("ul");
+      scorePanel.className = "score-panel";
+      var scoreListObj = scoreList();
+      for (var i=0;i<scoreListObj.length;i++){
+         var panelEl = document.createElement("li");
+         panelEl.innerHTML = "<span class='panel-initial'>" + scoreListObj[i].initial + "</span> <span class='panel-score'>" + scoreListObj[i].score + "</span>";
+         scorePanel.appendChild(panelEl);
+         document.body.appendChild(scorePanel);
+      }
+   } else {
+      mainParent.style.display = 'block';
+      this.textContent = "Show Scores"
+      var scorePanelExist = document.body.matches(".score-panel");
+      if (!scorePanelExist){
+         document.body.querySelector(".score-panel").remove();
+      }
+     }
+};
+
+
 
 startButton.addEventListener('click', displayQuestion);
 startButton.addEventListener('click', function() {
    intervalId = setInterval(timeCounter, 1000);
 });
 optionWrapper.addEventListener('click', evaluate);
+getScoreBtn.addEventListener('click', displayAllScore);

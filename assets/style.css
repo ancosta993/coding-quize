@@ -12,14 +12,29 @@ body{
    margin: auto;
 }
 
+.get-score{
+  display:inline-block;
+  margin-top:5px;
+  color:blue;
+}
+
+.get-score:hover{
+   cursor: pointer;
+   text-decoration: underline;
+}
+
 .timer{
    text-align: right;
-   position: relative;
-   right:0;
-   font-size: 25px;
+   position: absolute;
+   right:10%;
+   top:2%;
+   font-size: 30px;
    color: black;
 }
 
+.page-content{
+   margin-top:150px;
+}
 
 h3 {
    font-size:30px;
@@ -100,6 +115,38 @@ h3 {
 }
 
 label[for='initial']{
-   margin: center;
+   margin: auto;
    font-size:28px;
+}
+
+.score-panel{
+   display: flex;
+   flex-flow: column wrap;
+   margin:0;
+   list-style: none;
+   text-align:center;
+   margin-top:10%;
+   font-size:20px;
+   color:white;
+   background-color: rgb(58, 58, 103);
+}
+
+.score-panel li:nth-child(2n){
+   background-color:gray;
+}
+
+.score-panel li:nth-child(2n+1){
+   background-color:black;
+}
+
+.score-panel li{
+   /* border:1px solid black; */
+   margin: 1% 0;
+   width:100%;
+   align-self: center;
+   padding: 17px 0;
+} 
+
+.panel-initial, .panel-score{
+   margin:0 5%;
 }
