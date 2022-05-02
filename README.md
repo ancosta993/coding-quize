@@ -99,6 +99,6 @@ Uses the three functions:
 ![Question](./finished-look/question-example.PNG)
 ![final-page-finished](./finished-look/final-page-finished.PNG)
 ![final-page-timeout](./finished-look/final-page-timeout.PNG)
-![score-list](./finsihed-look/score-list.PNG)
+![score-list](./finished-look/score-list.PNG)
 
 
