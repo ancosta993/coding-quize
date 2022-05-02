@@ -95,4 +95,10 @@ Uses the three functions:
   - if the input field is empty, no initials and score is saved.
 
 ## Finished Look
+![finished-look](./finished-look/initial-page.PNG)
+![Question](./finished-look/question-example.PNG)
+![final-page-finished](./finished-look/final-page-finished.PNG)
+![final-page-timeout](./finished-look/final-page-timeout.PNG)
+![score-list](./finsihed-look/score-list.PNG)
+
 
