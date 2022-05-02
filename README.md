@@ -1,4 +1,5 @@
 # Coding Quiz
+Click [here](https://ancosta993.github.io/coding-quize/) for the project.
 
 ## Introduction
 This is a Javascript Fundamental quiz made using HTML, CSS, and Javascript for the user.
@@ -92,4 +93,6 @@ Uses the three functions:
   - sets the property of the obj:
   - `{initials: 'AB', score: '2'}` as an example
   - if the input field is empty, no initials and score is saved.
+
+## Finished Look
 
